@@ -1,0 +1,29 @@
+import re
+file_path="text.txt"
+def count_words_manually(file_path):
+    word_count={}
+    with open(file_path,'r')as file:
+        text=file.read().lower()
+        words=re.findall(r'\b\w+\b',text)
+
+        for word in words:
+            if word in word_count:
+                word_count[word] += 1
+            else:
+                word_count[word] = 1
+  
+    return word_count
+def get_top_words(word_count,top_n=10):
+    sorted_word_count=sorted(word_count.items(),key=lambda item: item[1], reverse=True)
+    return sorted_word_count[:top_n]
+
+word_count=count_words_manually(file_path)
+top_5_words=get_top_words(word_count, top_n=10)
+print("top10 most words:")
+for word, count in top_5_words:
+    print(f"{word}:{count}")
+
+
+
+
+
